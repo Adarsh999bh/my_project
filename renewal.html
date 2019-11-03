@@ -34,10 +34,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">feedback</a>
+                        <a class="dropdown-item" href="fedb.html">feedback</a>
                         <!-- <a class="dropdown-item" href="ind3.html">Bus Details</a> -->
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Contact us</a>
+                        <a class="dropdown-item" href="conn.html">Contact us</a>
                     </div>
                 </li>
                 <!-- <li class="nav-item">
@@ -55,19 +55,21 @@
         <span class="border border-dark"></span>
     </nav>
     <div class="image">
-        <img src="./1.jpg" alt="not_found" width="1360px" height="630px">
-        <div class="pdpassno">
-            <label for="passno"><h5>Enter application no. : </h5></label>
-            <input type="text" width="20" id="passno" name="appid">
+        <img src="./image.png" alt="not_found" width="1360px" height="630px">
+        <form action="renewal.php" method="POST">
+            <div class="pdpassno">
+                <label for="passno"><h5>Enter application no. : </h5></label>
+                <input type="text" width="20" id="passno" name="appid">
 
-        </div>
-        <div class="pdusn">
-            <label for="usn"><h5>Enter USN : </h5></label>
-            <input type="text" width="10" id="usn" name="usn">
-        </div>
-        <div class="pdbutt">
-            <a href="#"><button type="button" class="btn btn-dark" id="reg">Submit</button>
-            </a>
+            </div>
+            <div class="pdusn">
+                <label for="usn"><h5>Enter USN : </h5></label>
+                <input type="text" width="10" id="usn" name="usn">
+            </div>
+            <div class="pdbutt">
+                <button type="submit" class="btn btn-dark" id="reg">Submit</button>
+                <!-- <input type="submit" value="submit"> -->
+        </form>
 
         </div>
     </div>

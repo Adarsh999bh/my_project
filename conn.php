@@ -10,10 +10,7 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-<body>
-
-
-    </div>
+<body class="boddy" style="background-color: rgb(157, 192, 238);text-align:center;">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -26,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Pay Details<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="ind1.html">Pay Details<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="ind2.html">Bus Details<span class="sr-only">(current)</span></a>
@@ -54,26 +51,63 @@
         </div>
         <span class="border border-dark"></span>
     </nav>
-    <div class="image">
-        <img src="./image.png" alt="not_found" width="1360px" height="630px">
-        <div class="pdnote">
-            <p style="color: rgb(241, 9, 9);">* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, quisquam illum iusto sint sunt iure. Placeat aut alias est natus dolor consequatur sit velit, qui, aliquid asperiores provident? Vitae, quia?</p>
+    <div id="contact" class="container">
+        <br>
+        <br>
+        <h3 class="text-center">C O N T A C T - U S</h3>
+        <br>
+        <p class="text-center"><em>WE RESPOND IMMEDIATELY</em></p>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Want more information? </p>
+                <p>Drop a message.</p>
+                <p><span class="glyphicon glyphicon-map-marker"></span>Bangalore, India</p>
+                <p><span class="glyphicon glyphicon-phone"></span>Phone: +91 9898454523</p>
+                <p><span class="glyphicon glyphicon-envelope"></span>Email: ebus_pass@gmail.com</p>
+            </div>
+            <form action="sendmessage.php" method="POST">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-contrl" id="comments" name="comments" placeholder="Comment" rows="5" cols="70"></textarea>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <button class="btnpull" type="submit" style="color: black;" value="submit">Send</button>
+                    </div>
+                </div>
+                <?php
+$name = $_POST['name'];
+$email = $_POST['email'];
+$comments = $_POST['comments'];
+$msg = "Name : ".$name."\nEmail ID : ".$email."\n".$comments;
+$id = "adarshbhandary48@gmail.com";
+$sub = "QUERY & DOUBTS";
+$hed = "From:e-Buspass@gmail.com";
+
+if(mail($id,$sub,$msg,$hed))
+{
+  echo "<center>message sucessfully sent..!</center>";
+}
+else
+{
+    echo "<center>message not sent.</center>";
+}
+
+
+
+?>
+            </div>
         </div>
-        <form action="displaystatus.php" method="POST">
-            <div class="pdpassno">
-                <label for="passno"><h5>Enter application no. : </h5></label>
-                <input type="text" width="20" id="passno" name="appli_no">
-
-            </div>
-            <div class="pdusn">
-                <label for="usn"><h5>Enter USN : </h5></label>
-                <input type="text" width="10" id="usn" name="pusn">
-            </div>
-            <div class="pdbutt">
-                <button type="submit" class="btn btn-dark" id="reg">Submit</button>
-
-            </div>
-        </form>
+        <br>
     </div>
 </body>
 

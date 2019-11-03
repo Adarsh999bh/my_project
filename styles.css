@@ -4,6 +4,10 @@
     color: black;
 }
 
+.boddy {
+    background-color: rgb(157, 192, 238);
+}
+
 .head {
     color: black;
     position: absolute;
@@ -196,4 +200,10 @@ body {
     position: absolute;
     top: 45%;
     left: 41%;
+}
+
+.image.regphp {
+    position: absolute;
+    top: 45%;
+    left: 47%;
 }

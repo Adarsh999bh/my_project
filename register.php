@@ -29,10 +29,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">feedback</a>
+                        <a class="dropdown-item" href="fedb.html">feedback</a>
                         <!-- <a class="dropdown-item" href="ind3.html">Bus Details</a> -->
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Contact us</a>
+                        <a class="dropdown-item" href="conn.html">Contact us</a>
                     </div>
                 </li>
                 <!-- <li class="nav-item">

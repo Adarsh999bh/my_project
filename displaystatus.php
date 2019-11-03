@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
-
-<body>
-
-
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<body class="boddy" style="background-color: rgb(157, 192, 238);text-align:center;">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -26,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Pay Details<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="ind1.html">Pay Details<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="ind2.html">Bus Details<span class="sr-only">(current)</span></a>
@@ -53,28 +48,90 @@
             </li>
         </div>
         <span class="border border-dark"></span>
-    </nav>
-    <div class="image">
-        <img src="./image.png" alt="not_found" width="1360px" height="630px">
-        <div class="pdnote">
-            <p style="color: rgb(241, 9, 9);">* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus, quisquam illum iusto sint sunt iure. Placeat aut alias est natus dolor consequatur sit velit, qui, aliquid asperiores provident? Vitae, quia?</p>
-        </div>
-        <form action="displaystatus.php" method="POST">
-            <div class="pdpassno">
-                <label for="passno"><h5>Enter application no. : </h5></label>
-                <input type="text" width="20" id="passno" name="appli_no">
+    </nav>       
+<?php
+$servername = "localhost";
+$username = "root";
+$password ="";
+$databasename = "studentbusp";
 
-            </div>
-            <div class="pdusn">
-                <label for="usn"><h5>Enter USN : </h5></label>
-                <input type="text" width="10" id="usn" name="pusn">
-            </div>
-            <div class="pdbutt">
-                <button type="submit" class="btn btn-dark" id="reg">Submit</button>
+$connection = mysqli_connect($servername,$username,$password,$databasename);
+if(!$connection)
+{
+    die("connection failed :".mysqli_connect_error());
+}
+$reg = $_POST["appli_no"];
+$usn = $_POST["pusn"];
+// echo $reg;
+// echo $usn;
+if(is_null($reg) || is_null($usn))
+{
+    echo "please enter credentials ";
+    echo "<br>";
 
-            </div>
-        </form>
-    </div>
+}
+else
+{
+    $q = "select application_id,s_usn from student";
+    $r = mysqli_query($connection,$q);
+    $c = 0;
+    while ($row=$r->fetch_assoc())
+    {
+        if($reg == $row["application_id"] && $usn == $row["s_usn"])
+        {
+            $c = 1;
+            break;
+        }
+    }
+    if($c == 1)
+    {
+        $q = "select s_usn,s_branch,s_sem,clgname,r_name,s_boarding,s_dist,s_eid,paid from student,college,routedetails,paydetails where cid=s_collegeid and r_route=s_route and p_applid=application_id and application_id='$reg';";
+        $r = mysqli_query($connection,$q);
+        $row=$r->fetch_assoc();
+        echo "<br>";
+        echo "<h4>USN : ".$row['s_usn']."</h4>";
+        echo "<br>";
+        echo "<h4>Branch : ".$row['s_branch']."</h4>";
+        echo "<br>";
+        echo "<h4>Semister : ".$row['s_sem']."</h4>";
+        echo "<br>";
+        echo "<h4>College name : ".$row['clgname']."</h4>";
+        echo "<br>";
+        echo "<h4>Route : ".$row['r_name']."</h4>";
+        echo "<br>";
+        echo "<h4>Boarding point : ".$row['s_boarding']."</h4>";
+        echo "<br>";
+        echo "<h4>Distance : ".$row['s_dist']." Km</h4>";
+        echo "<br>";
+        echo "<h4>Email : ".$row['s_eid']."</h4>";
+        echo "<br>";
+        if($row['paid']=="yes"){
+            $zz="PAID";
+        }
+        else{
+            $zz="NOT PAID";
+        }
+        echo "<h4>Payment status : ".$zz."</h4>";
+        if($zz=="NOT PAID"){
+            $q="update apid set aplid='$reg';";
+            $r = mysqli_query($connection,$q);
+            echo '<a href="newcheck.php"><h6 style="color:black;">Go to payments</h6></a>';
+        }
+        echo "<br>";
+    }
+    else{
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<br>";
+        echo "<h3>Application ID or USn is not valid..!</h3>";
+    }
+}
+
+
+?>
 </body>
-
 </html>
